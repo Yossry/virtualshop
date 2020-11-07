@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_product_sales_report_wizard_ip" model="ir.ui.view">
+		<field name="name">product.sales.wizard.ip</field>
+		<field name="model">product.sale.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Product Sales Report Form">
+				<group>
+					<group>
+						<field name="from_date"/>
+						<field name="report_type" widget="radio"/>
+						<field name="report_by" widget="radio"/>
+					</group>
+					<group>
+						<field name="to_date"/>
+						<field name="report_of" widget="radio"/>
+						<field name="user_id" widget="many2many_tags" string='Sales Person' attrs="{'invisible': [('report_by', '!=', 'sales_person')]}" options="{'no_create': True}"/>
+						<field name="team_id" widget="many2many_tags" string='Sales Team' attrs="{'invisible': [('report_by', '!=', 'sales_team')]}" options="{'no_create': True}"/>
+					</group>
+				</group>
+				<footer>
+					<button string=" Print" name="print_report" icon="fa-download" type="object" class="oe_highlight"/>
+					<button string="Cancel" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<act_window id="action_product_sale_report_wizard_ip" name="Sales Details Reports" res_model="product.sale.wizard" view_mode="form" target="new"/>
+
+    <menuitem id="menu_product_sale_report_ip" name="Sales Details" parent="sale.menu_sale_report" action="action_product_sale_report_wizard_ip" sequence="3"/>
+</odoo>

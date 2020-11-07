@@ -1,0 +1,123 @@
+<odoo>
+    <report id="report_product_sales_weekly_ip"
+        model="product.sale.wizard"
+        string="Product Sales Report Weekly"
+        name="product_sales_report.report_of_product_sales_weekly_view"
+        file="product_sales_report.report_of_product_sales_weekly_view"
+        report_type="qweb-pdf"/>
+
+    <template id="product_sales_report.report_of_product_sales_weekly_view">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-8 text-center">
+                            <h4>
+                                <t t-if="data['report_of'] == 'product'">Products</t>
+                                <t t-else="">Category</t>
+                                Sales Report by Sales
+                                <t t-if="data['report_by'] == 'sales_team'">Team</t>
+                            <t t-else="">Person</t>
+                            </h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            Date: <span t-esc="data['from_date']"/> To <span t-esc="data['to_date']"/>
+                        </div>
+                    </div>
+                    <table class="table table-sm table-bordered mt16">
+                        <thead>
+                            <tr>
+                                <td rowspan="2"><strong>Name</strong></td>
+                                <td colspan="7" class="text-center"><strong>Quantity</strong></td>
+                                <td rowspan="2" class="text-right"><strong>Total</strong></td>
+                            </tr>
+                            <tr>
+                                <t t-foreach="days" t-as="day">
+                                    <td class="text-right" t-esc="day"/>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="final_mon" t-value="0"/>
+                            <t t-set="final_tue" t-value="0"/>
+                            <t t-set="final_wed" t-value="0"/>
+                            <t t-set="final_thu" t-value="0"/>
+                            <t t-set="final_fri" t-value="0"/>
+                            <t t-set="final_sat" t-value="0"/>
+                            <t t-set="final_sun" t-value="0"/>
+                            <t t-set="final_total" t-value="0"/>
+                            <t t-foreach="doc_ids" t-as="dict_info">
+                                <t t-set="mon" t-value="0"/>
+                                <t t-set="tue" t-value="0"/>
+                                <t t-set="wed" t-value="0"/>
+                                <t t-set="thu" t-value="0"/>
+                                <t t-set="fri" t-value="0"/>
+                                <t t-set="sat" t-value="0"/>
+                                <t t-set="sun" t-value="0"/>
+                                <t t-set="total" t-value="0"/>
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section'">
+                                    <td colspan="9"><span t-esc="dict_info"/></td>
+                                </tr>
+                                <tr t-foreach="doc_ids.get(dict_info)" t-as="line">
+                                    <t t-set="quantity" t-value="0"/>
+                                    <t t-foreach="header_list" t-as="header">
+                                        <t t-if="header == 'Qty'">
+                                            <t t-set="qty_list" t-value="doc_ids.get(dict_info).get(line).get(header)"/>
+                                            <t t-set="mon" t-value="mon + qty_list[0]"/>
+                                            <t t-set="tue" t-value="tue + qty_list[1]"/>
+                                            <t t-set="wed" t-value="wed + qty_list[2]"/>
+                                            <t t-set="thu" t-value="thu + qty_list[3]"/>
+                                            <t t-set="fri" t-value="fri + qty_list[4]"/>
+                                            <t t-set="sat" t-value="sat + qty_list[5]"/>
+                                            <t t-set="sun" t-value="sun + qty_list[6]"/>
+                                            <t t-foreach="qty_list" t-as="qty">
+                                                <td class="text-right" t-esc="qty"/>
+                                                <t t-set="quantity" t-value="quantity + qty"/>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <td t-esc="doc_ids.get(dict_info).get(line).get(header)"/>
+                                        </t>
+                                    </t>
+                                    <td class="text-right" t-esc="quantity"/>
+                                    <t t-set="total" t-value="total + quantity"/>
+                                </tr>
+                                <tr class="border-black">
+                                    <td><strong>Total :</strong></td>
+                                    <td class="text-right"><strong t-esc="mon"/></td>
+                                    <t t-set="final_mon" t-value="final_mon + mon"/>
+                                    <td class="text-right"><strong t-esc="tue"/></td>
+                                    <t t-set="final_tue" t-value="final_tue + tue"/>
+                                    <td class="text-right"><strong t-esc="wed"/></td>
+                                    <t t-set="final_wed" t-value="final_wed + wed"/>
+                                    <td class="text-right"><strong t-esc="thu"/></td>
+                                    <t t-set="final_thu" t-value="final_thu + thu"/>
+                                    <td class="text-right"><strong t-esc="fri"/></td>
+                                    <t t-set="final_fri" t-value="final_fri + fri"/>
+                                    <td class="text-right"><strong t-esc="sat"/></td>
+                                    <t t-set="final_sat" t-value="final_sat + sat"/>
+                                    <td class="text-right"><strong t-esc="sun"/></td>
+                                    <t t-set="final_sun" t-value="final_sun + sun"/>
+                                    <td class="text-right"><strong t-esc="total"/></td>
+                                    <t t-set="final_total" t-value="final_total + total"/>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td><strong>Final Total :</strong></td>
+                                <td class="text-right"><strong t-esc="final_mon"/></td>
+                                <td class="text-right"><strong t-esc="final_tue"/></td>
+                                <td class="text-right"><strong t-esc="final_wed"/></td>
+                                <td class="text-right"><strong t-esc="final_thu"/></td>
+                                <td class="text-right"><strong t-esc="final_fri"/></td>
+                                <td class="text-right"><strong t-esc="final_sat"/></td>
+                                <td class="text-right"><strong t-esc="final_sun"/></td>
+                                <td class="text-right"><strong t-esc="final_total"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
