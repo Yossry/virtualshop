@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="petstore_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/stock_scan_frontend/static/src/css/font-awesome.min.css"/>
+                <link rel="stylesheet" href="/stock_scan_frontend/static/src/css/stock.css"/>
+
+                <script src="/point_of_sale/static/lib/backbone/backbone.js"></script>
+                <script src="/stock_scan_frontend/static/src/js/crypto-js.js"></script>
+                <script src="/stock_scan_frontend/static/src/js/md5.min.js"></script>
+
+                <script type="text/javascript" src="/stock_scan_frontend/static/src/js/stock.js"/>
+                 <script type="text/javascript" src="/stock_scan_frontend/static/src/js/stock1.js"/>
+            </xpath>
+        </template>
+
+        <record id="action_start_scanning" model="ir.actions.client">
+            <field name="name">Start Scanning</field>
+            <field name="tag">stock.scan</field>
+            <field name="target">current</field>
+            <field name="res_model">stock.picking</field>
+
+        </record>
+
+
+
+
+
+
+
+        <record id="stock_picking_scan_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.scan.inherit.viewpc</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <!--                    <button name="synchronize_scan"
+                    string="Synchronize" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('state', '!=', 'assigned')]}"/>-->
+                    <field name="id" invisible="1" />
+                    <button class="startscanclass" name="%(action_start_scanning)d" type="action" string="Start Scan" attrs="{'invisible': ['|',('id', '=', False),('state', 'in', ['done', 'cancel'])]}"/>
+
+                </xpath>
+
+
+
+                <!--<xpath expr="//notebook/page[4]" position="replace">-->
+                    <!--<page string="Scan">-->
+                        <!--<field name="scan_products_ids">-->
+                            <!--<tree editable="bottom" colors="red:product_availabilty &lt; product_uom_qty; green:product_availabilty &gt; product_uom_qty;">-->
+                                <!--<field name="product_id" />-->
+                                <!--<field name="product_uom_qty" sum="Product Sum"/>-->
+                                <!--<field name="lot_no"/>-->
+                                <!--<field name="pick_Typ_code" invisible="1"/>-->
+                                <!--<field name="lot_name" string="Lot Name"/>-->
+                                <!--<field name="expiration_date"/>-->
+                                <!--<field name="product_availabilty"/>-->
+                            <!--</tree>-->
+                        <!--</field>-->
+
+                        <!--&lt;!&ndash;temp products&ndash;&gt;-->
+                        <!--<field name="temp_scan_products_ids" invisible="1">-->
+                            <!--<tree editable="bottom">-->
+                                <!--<field name="product_id"/>-->
+                                <!--<field name="product_uom_qty"/>-->
+                            <!--</tree>-->
+                        <!--</field>-->
+
+                    <!--</page>-->
+                <!--</xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>
