@@ -1,0 +1,103 @@
+<odoo>
+    <report id="report_product_sales_summary_ip"
+        model="product.sale.wizard"
+        string="Product Sales Report Summary"
+        name="product_sales_report.report_of_product_sales_view"
+        file="product_sales_report.report_of_product_sales_view"
+        report_type="qweb-pdf"/>
+
+    <template id="product_sales_report.report_of_product_sales_view">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-8 text-center">
+                            <h4>
+                                <t t-if="data['report_of'] == 'product'">Products</t>
+                                <t t-else="">Category</t>
+                                Sales Report by Sales
+                                <t t-if="data['report_by'] == 'sales_team'">Team</t>
+                            <t t-else="">Person</t>
+                            </h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            Date: <span t-esc="data['from_date']"/> To <span t-esc="data['to_date']"/>
+                        </div>
+                    </div>
+                    <table class="table table-sm table-bordered mt16">
+                        <thead>
+                            <tr>
+                                <td rowspan="2"><strong>Name</strong></td>
+                                <td rowspan="2" class="text-right"><strong>Quantity</strong></td>
+                                <td t-att-colspan="len(currency_list)" class="text-center"><strong>Subtotal</strong></td>
+                            </tr>
+                            <tr>
+                                <t t-foreach="currency_list" t-as="cur_name">
+                                    <td class="text-right" t-esc="cur_name"/>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc_ids" t-as="dict_info">
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section'">
+                                    <td colspan="9"><span t-esc="dict_info"/></td>
+                                </tr>
+                                <tr t-foreach="doc_ids.get(dict_info)" t-as="line" t-if="line != dict_info">
+                                    <t t-foreach="header_list" t-as="name">
+                                        <t t-set="product" t-value="doc_ids.get(dict_info).get(line).get(name)"/>
+                                        <t t-if="name in header_list[2:] and product.get('position') == 'after'">
+                                            <td class="text-right"><t t-esc="'%.2f' % (product.get('amount'))"/> <t t-esc="product.get('symbol')"/></td>
+                                        </t>
+                                        <t t-elif="name in header_list[2:] and product.get('position') == 'before'">
+                                            <td class="text-right"><t t-esc="product.get('symbol')"/> <t t-esc="'%.2f' % (product.get('amount'))"/></td>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-if="name == 'Quantity'">
+                                                <td class="text-right"><t t-esc="product"/></td>
+                                            </t>
+                                            <t t-else="">
+                                                <td><t t-esc="product"/></td>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <t t-set="total" t-value="doc_ids.get(dict_info).get(dict_info)"/>
+                                <tr>
+                                    <t t-foreach="header_list" t-as="name">
+                                        <td class="text-right"><strong>
+                                            <t t-if="name in header_list[2:] and total.get(name).get('position') == 'after'">
+                                                <t t-esc="'%.2f' % (total.get(name).get('amount'))"/> <t t-esc="total.get(name).get('symbol')"/>
+                                            </t>
+                                            <t t-elif="name in header_list[2:] and total.get(name).get('position') == 'before'">
+                                                <t t-esc="total.get(name).get('symbol')"/> <t t-esc="'%.2f' % (total.get(name).get('amount'))"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="total.get(name)"/>
+                                            </t>
+                                        </strong></td>
+                                    </t>
+                                </tr>
+                            </t>
+                            <tr>
+                                <t t-foreach="header_list" t-as="name">
+                                    <td class="text-right"><strong>
+                                    <t t-if="name in header_list[2:] and final_total.get(name).get('position') == 'after'">
+                                        <t t-esc="'%.2f' % (final_total.get(name).get('amount'))"/> <t t-esc="final_total.get(name).get('symbol')"/>
+                                    </t>
+                                    <t t-elif="name in header_list[2:] and final_total.get(name).get('position') == 'before'">
+                                        <t t-esc="final_total.get(name).get('symbol')"/> <t t-esc="'%.2f' % (final_total.get(name).get('amount'))"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="final_total.get(name)"/>
+                                    </t>
+                                    </strong></td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
