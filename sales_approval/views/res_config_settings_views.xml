@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Form View: Inherit Res Config Settings -->
+    <record id="res_config_settings_view_form_sale_inherit_sales_approval" model="ir.ui.view">
+        <field name="name">res.config.settings.inherit.sales_approval</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Make to double approval configuration for Sale Order -->
+            <xpath expr="//div[@class='row mt16 o_settings_container'][3]/div[@id='sale_config_online_confirmation_sign']" position="before">
+                <div class="col-12 col-lg-6 o_setting_box" id="sale_config_approval">
+                    <div class="o_setting_left_pane">
+                        <field name="so_order_approval"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="so_order_approval"/>
+                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                        <div class="text-muted">
+                            Managers must approve orders
+                        </div>
+                        <div class="content-group" attrs="{'invisible': [('so_order_approval', '=', False)]}">
+                            <div class="row mt16">
+                                <label for="so_double_validation_amount" class="col-lg-4 o_light_label"/>
+                                <field name="so_double_validation_amount"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+       </field>
+    </record>
+</odoo>
