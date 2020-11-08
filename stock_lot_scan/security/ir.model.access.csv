@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_scan_product,user scan product,model_scan_product,,1,1,1,1
+access_user_temp_product,user temp product,model_temp_product,,1,1,1,1
+access_user_temp_scan_product,user temp scan product,model_temp_scan_product,,1,1,1,1

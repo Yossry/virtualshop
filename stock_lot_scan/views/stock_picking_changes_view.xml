@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="stock_lot_scan_id" name="stock_lot_scan_id value" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/stock_lot_scan/static/src/js/stock_lot_scan.js"></script>
+            </xpath>
+        </template>
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit.picking.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="synchronize_scan"
+                            string="Synchronize" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}"
+                            />
+<!--                    <button name="validate_all_pickings"-->
+<!--                            string="Validate All" type="object" class="oe_highlight"-->
+<!--                            />-->
+                </xpath>
+
+
+                <field name="partner_id" position="replace">
+                    <field name="partner_id"/>
+                </field>
+
+                <field name="backorder_id" position="after">
+                    <field name="ean13" invisible="0" groups="base.group_no_one"/>
+                    <!--<field name="ean132"  invisible="0"/>-->
+                    <!--<field name="ean_out"  attrs="{'invisible': [('pickin_Typ_code', '=', 'incoming')]}"/>-->
+                    <button name="savebeforescanbutton" string="savebeforescanbutton" style="display:none"/>
+
+                    <field name="pickin_Typ_code" invisible="1"/>
+                    <field name="supplier_ean13" attrs="{'invisible': [('pickin_Typ_code', '!=', 'incoming')]}"
+                           invisible="1"/>
+                    <!--<field name="supplier_ean132" invisible="1"/>-->
+                </field>
+
+
+                <field name="origin" position="after">
+                    <field name="type_of_scaning" attrs="{'invisible': [('pickin_Typ_code', '!=', 'incoming')],'required': [('pickin_Typ_code', '=', 'incoming')]}"
+                           string="Type Of Scan"/>
+                </field>
+
+
+                <xpath expr="//notebook/page[3]" position="after">
+
+                    <page string="Scan">
+                        <!--<group>-->
+                        <!--<button name="clear_scanned_lines" string="Clear" type="object" class="oe_highlight"/>-->
+                        <!--</group>-->
+                        <!--                        <group>
+                            <label for="last_scanned_item"/>
+                            <field name="last_scanned_item" style="color:blue" />
+                        </group>-->
+                        <field name="scan_products_ids">
+                            <!--colors="blue:state == 'draft';"-->
+                            <tree editable="bottom" colors="red:product_availabilty &lt; product_uom_qty; green:product_availabilty &gt; product_uom_qty;">
+                                <field name="product_id" />
+                                <field name="product_uom_qty" sum="Product Sum"/>
+                                <field name="lot_no"/>
+                                <field name="pick_Typ_code" invisible="1"/>
+
+                                <!--<field name="lot_name" string="Lot Name"-->
+                                <!--attrs="{'invisible': [('pick_Typ_code', '!=', 'incoming')]}"/>-->
+                                <!--<field name="expiration_date"-->
+                                <!--attrs="{'invisible': [('pick_Typ_code', '!=', 'incoming')]}"/>-->
+                                <field name="lot_name" string="Lot Name"/>
+                                <field name="expiration_date"/>
+                                <field name="product_availabilty"/>
+                            </tree>
+                        </field>
+
+                        <!--temp products-->
+                        <field name="temp_products_ids" invisible="1">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="product_uom_qty"/>
+                                <field name="lot_no"/>
+                                <field name="pick_Typ_code" invisible="1"/>
+                                <field name="lot_name" string="Lot Name"
+                                />
+                                <field name="expiration_date"
+                                />
+                            </tree>
+                        </field>
+
+                        <!--temp products-->
+                        <field name="temp_scan_products_ids" invisible="1">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="product_uom_qty"/>
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+
+<!--                <xpath expr="//notebook/page/field[@name='move_lines']/tree/field[@name='quantity_done']" position="before">-->
+<!--                    <field name="to_be_done" attrs="{'column_invisible': [('parent.state','=', 'done')]}"/>-->
+<!--                </xpath>-->
+
+                <!--<xpath expr="//notebook/page/field[@name='move_lines']/kanban" position="inside">-->
+                    <!--<field name="check_is_scanned"/>-->
+                <!--</xpath>-->
+
+                <!--<xpath expr="//notebook/page/field[@name='move_lines']/kanban" position="inside">-->
+                    <!--<field name="lot_name"/>-->
+                <!--</xpath>-->
+
+                <!--<xpath expr="//notebook/page/field[@name='move_lines']/kanban" position="inside">-->
+                    <!--<field name="expiration_date"/>-->
+                <!--</xpath>-->
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_move_picking_tree_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.tree.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="lot_name"/>
+                    <field name="expiration_date"/>
+                </field>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <!--<record id="stock_picking_kanban_inherit" model="ir.ui.view">-->
+        <!--<field name="name">stock.picking.inherit</field>-->
+        <!--<field name="model">stock.picking</field>-->
+        <!--<field name="inherit_id" ref="stock.stock_picking_kanban"/>-->
+        <!--<field name="arch" type="xml">-->
+
+        <!--&lt;!&ndash;<xpath expr="//field[@name='name']" position="">&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash; Add your fields or attributes here &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</xpath>&ndash;&gt;-->
+        <!--<xpath expr="//notebook/page/field[@name='move_lines']/kanban" position="inside">-->
+        <!--<field name="expiration_date"/>-->
+        <!--</xpath>-->
+        <!--&lt;!&ndash;<field name="name" position="after">&ndash;&gt;-->
+        <!--&lt;!&ndash;<field name="lot_name"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</field>&ndash;&gt;-->
+
+        <!--</field>-->
+        <!--</record>-->
+
+
+    </data>
+</odoo>

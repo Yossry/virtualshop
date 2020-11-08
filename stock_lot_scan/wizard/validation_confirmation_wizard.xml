@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+
+
+
+
+
+
+        <!--<record id="action_transfer_validation_confirmation" model="ir.actions.act_window">-->
+            <!--<field name="name">Transfer Validation Confirmation</field>-->
+            <!--<field name="type">ir.actions.act_window</field>-->
+            <!--<field name="res_model">transfer.validation.confirmation</field>-->
+            <!--<field name="view_mode">form</field>-->
+            <!--&lt;!&ndash;<field name="view_id" ref="g2m_form_wizard"/>&ndash;&gt;-->
+            <!--<field name="target">new</field>-->
+        <!--</record>-->
+
+        <record id="view_transfer_validation_confirmation_wizard" model="ir.ui.view">
+            <field name="name">transfer_validation_confirmation_wizard</field>
+            <field name="model">transfer.validation.confirmation</field>
+            <field name="arch" type="xml">
+                <form string="Warning">
+                    <group class="oe_grey">
+                        <!--<label string=" />-->
+                        <h3>There are unequal quantities, Are you sure you want to continue validation?"</h3>
+                    </group>
+                    <footer>
+                        <button name="transfer_validation_confirmed" type='object' string='Confirm' class="btn-primary btn-default"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_transfer_validation_confirmation" model="ir.actions.act_window">
+            <field name="name">Transfer Validation Confirmation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transfer.validation.confirmation</field>
+            <field name="view_id" ref="view_transfer_validation_confirmation_wizard"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <!--<menuitem id="menu_action_wizard_actions" name="Wizared" parent="stock.menu_stock_root" action="action_transfer_validation_confirmation" sequence="5"/>-->
+    </data>
+</odoo>

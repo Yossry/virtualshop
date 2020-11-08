@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<templates xml:space="preserve">
+    <t t-name="Scanning">
+        <div style="padding:20px;">
+            <div class="products">
+                    <div class="col-md-12"><button class='save_button btn btn-primary btn-sm o_list_button_add'>Confirm scanned items</button> <button class='cancel_button btn btn-sm btn-default'>Cancel</button></div>
+            </div>
+            <div class="products" style="padding-top: 10px;padding-bottom: 10px;clear: both;">
+                    <div class="col-md-3"> </div><div class="col-md-6" style="text-align: center;"><input placeholder="Internal Reference" type="text" name="default_code" id="default_code" style="display:none;float: left;width:30%;" /><input placeholder="Serial No." type="text" id="scan_box" style="float: left;width:30%;" /><input placeholder="Expiration Date" type="text" id="expiration_date" name="expiration_date" style="display:none;float: left;width:30%;" /></div><div class="col-md-3"> </div>
+            </div>
+            <div class="lastScanned" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8"><strong>Last Scanned: [<span id="productCode" style="color:blue"></span>] <span id="productName" style="color:blue"></span> - Serial: <span id="productSerial" style="color:blue"></span></strong></div>
+                <div class="col-md-2"></div>
+            </div>
+            <div id="productsList" style="display: none;"></div>
+            <div class="table-responsive" style="width:100%;">
+                <table class="o_list_view table table-condensed table-striped">
+                    <thead class="ui-widget-header">
+                        <tr>
+                            <th class="">
+                                Product
+                            </th>
+                            <th class="">
+                                Qty
+                            </th>
+                            <th class="">
+                                Serial No.
+                            </th>
+                            <th class="">
+                                Lot Name
+                            </th>
+                            <th class="">
+                                Expiration Date
+                            </th>
+                            <th class=""></th>
+                        </tr>
+                    </thead>
+                    <tbody class="ui-widget-content">
+                    </tbody>
+                    <tfoot  class="ui-widget-header">
+                        <tr>
+                            <td></td>
+                            <td>Total Qty: <span class="totalQty">0</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="products" style="padding-top: 10px;padding-bottom: 10px;">
+                    <div class="col-md-12" style=""><button class='save_button btn btn-primary btn-sm o_list_button_add'>Confirm scanned items</button> <button class='cancel_button btn btn-sm btn-default'>Cancel</button></div>
+            </div>
+            <div id="warningModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>The lot number you entered not found!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div id="ProductNotAvailableModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>This product is not found in current location!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div id="limitReachedModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>There are no more quants of that product available!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div id="expiredModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>The lot number <span class="expiredLotSerialSpan"></span> is Expired!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div id="trackingModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>This product is not tracked by Lot/Serial Number!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+            <div id="productNotFoundModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>The Product can not be found!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+            <div id="invalidDateModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Invalid date!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+            <div id="invalidLotModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">X</button>
+                      <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Invalid Lot number!</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+            <audio id="audio" src="http://www.soundjay.com/button/beep-04.wav" autostart="false" ></audio>
+        </div>
+    </t>
+</templates>
+    </odoo>
