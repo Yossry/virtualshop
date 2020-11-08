@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Invoice View -->
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name='create_stock_moves' attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                    <field name='picking_id' readonly='1' attrs="{'invisible': [('create_stock_moves','=', False)]}"/>
+                    <field name="warehouse_id" attrs="{'invisible': [('create_stock_moves','=', False)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_post']" position="replace">
+                    <button name="action_post" string="Post" class="oe_highlight" type="object" groups="account.group_account_invoice" attrs="{'invisible': ['|',('state','!=', 'draft'), ('create_stock_moves','=',True)]}"/>
+                    <button name="action_post" string="Post" class="oe_highlight" type="object" groups="account.group_account_invoice" attrs="{'invisible': ['|',('state','!=', 'draft'), ('create_stock_moves','=',False)]}" confirm="Are you sure that you want to cleate stock moves with this Invoice."/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+
+</odoo>
