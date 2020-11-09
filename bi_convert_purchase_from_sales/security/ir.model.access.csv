@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+product_attribute_custom_value_user,product_attribute_custom_value_user_name,sale.model_product_attribute_custom_value,,1,1,1,1
