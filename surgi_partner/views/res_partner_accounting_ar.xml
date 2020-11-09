@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="res_partner_new_fields" model="ir.ui.view">
+            <field name="name">surgitech.partner.new.fields</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="arabic_name"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']" position="before">
+                    <field name="customer" string="Is a customer"/>
+                </xpath>
+
+                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="before">
+                    <field name="vendor" string="Is a vendor"/>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="customer_kind" /><!--attrs="{'invisible': [('customer', '=', False)],'required':[('customer', '!=', False)]}"-->
+                </xpath>
+
+        <xpath expr="//notebook/page[@name='sales_purchases']" position="after">
+            <page name="sales_configuration" string="Sales Configuration" ><!--attrs="{'invisible': [('customer', '=', False)]}"-->
+                            <group name="container_row_2">
+                                <group string="Customer">
+                                    <field name="authority"/>
+                                    <field name="customer_category"/>
+                                    <field name="suregon_code" /><!--attrs="{'invisible': [('customer_kind', '!=', 'surgeon' )],'required': [('customer_kind', '=', 'surgeon')]}"-->
+                                </group>
+                                <group string="Account Receivable" name="Account Receivable">
+                                    <field name="tareget_in_out" widget="radio" options="{'horizontal': true}"/>
+                                </group>
+                                <group string="Sales Team" name="sale_team">
+                                    <field name="team_id"  options="{'no_open': True}"/>
+                                    <field name="direct_sales_users" options="{'no_create': True, 'no_open': True}"/>
+                                </group>
+                            </group>
+                        </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
