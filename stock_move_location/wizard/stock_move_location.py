@@ -32,7 +32,6 @@ class StockMoveLocationWizard(models.TransientModel):
     origin_location_id = fields.Many2one(
         string="Origin Location",
         comodel_name="stock.location",
-        required=True,
         domain=lambda self: self._get_locations_domain(),
     )
     destination_location_disable = fields.Boolean(
@@ -42,7 +41,6 @@ class StockMoveLocationWizard(models.TransientModel):
     destination_location_id = fields.Many2one(
         string="Destination Location",
         comodel_name="stock.location",
-        required=True,
         domain=lambda self: self._get_locations_domain(),
     )
     stock_move_location_line_ids = fields.Many2many(
