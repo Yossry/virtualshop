@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_cust_form_custom" model="ir.ui.view">
+		<field name="name">res.partner.form.inherit</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='website']" position="after">
+				<field name="supplier_rank" invisible="1"/>
+				<field name="customer_rank" invisible="1"/>
+                 <field name="qbo_customer_id" attrs="{'invisible':[('supplier_rank','=',1)]}" readonly="1"/>
+                 <field name="qbo_vendor_id" attrs="{'invisible':[('customer_rank','=',1)]}" readonly="1"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_cust_tree_custom" model="ir.ui.view">
+		<field name="name">res.partner.tree.inherit</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='email']" position="after">
+				<field name="supplier_rank" invisible="1"/>
+				<field name="customer_rank" invisible="1"/>
+                 <field name="qbo_customer_id" attrs="{'invisible':[('supplier_rank','=',1)]}"/>
+                 <field name="qbo_vendor_id" attrs="{'invisible':[('customer_rank','=',1)]}"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

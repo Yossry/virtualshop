@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    
+         <!-- <record model="ir.cron" id="import_all_cron" forcecreate="True">
+           <field name="name">Import All Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_all()</field>
+         </record> -->
+         
+          <record model="ir.cron" id="import_customer_vendor_cron" forcecreate="True">
+           <field name="name">Import Customer and Vendor Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_customer_vendor_cron()</field>
+         </record>
+         
+          <record model="ir.cron" id="import_product_cron" forcecreate="True">
+           <field name="name">Import Product Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_product_cron()</field>
+         </record>
+         
+          <record model="ir.cron" id="import_sales_order_cron" forcecreate="True">
+           <field name="name">Import Sales Order Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_sale_order()</field>
+         </record>
+         
+          <record model="ir.cron" id="import_customer_invoice_cron" forcecreate="True">
+           <field name="name">Import Customer Invoice Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_customer_invoice_cron()</field>
+         </record>
+         
+          <record model="ir.cron" id="import_purchase_order_cron" forcecreate="True">
+           <field name="name">Import Purchase Order Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_purchase_order_cron()</field>
+         </record>
+         
+          <record model="ir.cron" id="import_vendor_bill_cron" forcecreate="True">
+           <field name="name">Import Vendor Bill Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_vendor_bill_cron()</field>
+         </record>
+         
+         
+          <record model="ir.cron" id="import_customer_payment_cron" forcecreate="True">
+           <field name="name">Import Customer Payment Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_customer_payment_cron()</field>
+         </record>
+         
+         
+          <record model="ir.cron" id="import_vendor_payment_cron" forcecreate="True">
+           <field name="name">Import Vendor Payment Cron</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="False" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_vendor_payment_cron()</field>
+         </record>
+         
+   </data>
+</odoo>

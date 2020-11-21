@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Product category inherited -->
+	<record model="ir.ui.view" id="qbo_view_category_form">
+		<field name="name">qbo.view.category.form</field>
+		<field name="model">product.category</field>
+		<field name="inherit_id" ref="product.product_category_form_view" />
+		<field name="arch" type="xml">
+			<field name="product_count" position="after">
+				<field name="qbo_product_category_id" readonly="1"/>
+			</field>
+		</field>
+	</record>
+	
+	<!-- Server action to export product to quickbooks -->	
+	<!-- <record model="ir.actions.server" id="export_product_to_quickbooks">
+        <field name="name">Export to QBO</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">if records:
+               action = records.export_product_to_qbo()
+        </field>
+    </record> -->
+    
+    <record model="ir.actions.server" id="export_product_to_quickbook">
+        <field name="name">Export to QBO</field>
+        <field name="model_id" ref="product.model_product_product"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">if records:
+               action = records.export_product_to_qbo()
+        </field>
+    </record>
+    
+     <!-- Product template inherited -->
+     <record model="ir.ui.view" id="qbo_view_product_template_only_form">
+        <field name="name">qbo.product.template.only.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="qbo_product_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+    
+    <!-- Product product inherited -->
+     <record model="ir.ui.view" id="qbo_view_product_normal_form">
+        <field name="name">qbo.product.normal.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="qbo_product_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="qbo_view_product_normal_tree">
+        <field name="name">qbo.product.normal.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="qbo_product_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

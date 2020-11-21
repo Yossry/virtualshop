@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- QBO account type master -->
+        <record id="qbo_acc_type_bank" model="qbo.account.type">
+            <field name="name">Bank</field>
+        </record>
+        <record id="qbo_acc_type_otherCurrentAsset" model="qbo.account.type">
+            <field name="name">Other Current Asset</field>
+        </record>
+        <record id="qbo_acc_type_fixedAsset" model="qbo.account.type">
+            <field name="name">Fixed Asset</field>
+        </record>
+        <record id="qbo_acc_type_otherAsset" model="qbo.account.type">
+            <field name="name">Other Asset</field>
+        </record>
+        <record id="qbo_acc_type_accountsReceivable" model="qbo.account.type">
+            <field name="name">Accounts Receivable</field>
+        </record>
+        <record id="qbo_acc_type_equity" model="qbo.account.type">
+            <field name="name">Equity</field>
+        </record>
+        <record id="qbo_acc_type_expense" model="qbo.account.type">
+            <field name="name">Expense</field>
+        </record>
+        <record id="qbo_acc_type_otherExpense" model="qbo.account.type">
+            <field name="name">Other Expense</field>
+        </record>
+        <record id="qbo_acc_type_costOfGoodsSold" model="qbo.account.type">
+            <field name="name">Cost of Goods Sold</field>
+        </record>
+        <record id="qbo_acc_type_accountsPayable" model="qbo.account.type">
+            <field name="name">Accounts Payable</field>
+        </record>
+        <record id="qbo_acc_type_creditCard" model="qbo.account.type">
+            <field name="name">Credit Card</field>
+        </record>
+        <record id="qbo_acc_type_longTermLiability" model="qbo.account.type">
+            <field name="name">Long Term Liability</field>
+        </record>
+        <record id="qbo_acc_type_otherCurrentLiability" model="qbo.account.type">
+            <field name="name">Other Current Liability</field>
+        </record>
+        <record id="qbo_acc_type_income" model="qbo.account.type">
+            <field name="name">Income</field>
+        </record>
+        <record id="qbo_acc_type_otherIncome" model="qbo.account.type">
+            <field name="name">Other Income</field>
+        </record>
+
+        <!-- QBO account subtype master -->
+        <!-- Bank -->
+        <record id="qbo_acc_subtype_CashOnHand" model="qbo.account.subtype">
+            <field name="name">Cash On Hand</field>
+            <field name="internal_name">CashOnHand</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+        <record id="qbo_acc_subtype_Checking" model="qbo.account.subtype">
+            <field name="name">Checking</field>
+            <field name="internal_name">Checking</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+        <record id="qbo_acc_subtype_MoneyMarket" model="qbo.account.subtype">
+            <field name="name">Money Market</field>
+            <field name="internal_name">MoneyMarket</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+        <record id="qbo_acc_subtype_RentsHeldInTrust" model="qbo.account.subtype">
+            <field name="name">Rents Held In Trust</field>
+            <field name="internal_name">RentsHeldInTrust</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+        <record id="qbo_acc_subtype_Savings" model="qbo.account.subtype">
+            <field name="name">Savings</field>
+            <field name="internal_name">Savings</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+        <record id="qbo_acc_subtype_TrustAccounts" model="qbo.account.subtype">
+            <field name="name">Trust Accounts</field>
+            <field name="internal_name">TrustAccounts</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_bank"/>
+        </record>
+
+        <!-- Other Current Asset -->
+        <record id="qbo_acc_subtype_AllowanceForBadDebts" model="qbo.account.subtype">
+            <field name="name">Allowance For Bad Debts</field>
+            <field name="internal_name">AllowanceForBadDebts</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_DevelopmentCosts" model="qbo.account.subtype">
+            <field name="name">Development Costs</field>
+            <field name="internal_name">DevelopmentCosts</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_EmployeeCashAdvances" model="qbo.account.subtype">
+            <field name="name">Employee Cash Advances</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherCurrentAssets" model="qbo.account.subtype">
+            <field name="internal_name">OtherCurrentAssets</field>
+            <field name="name">Other Current Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Inventory" model="qbo.account.subtype">
+            <field name="internal_name">Inventory</field>
+            <field name="name">Inventory</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Investment_MortgageRealEstateLoans" model="qbo.account.subtype">
+            <field name="internal_name">Investment_MortgageRealEstateLoans</field>
+            <field name="name">Investment Mortgage Real Estate Loans</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Investment_Other" model="qbo.account.subtype">
+            <field name="internal_name">Investment_Other</field>
+            <field name="name">Investment Other</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Investment_TaxExemptSecurities" model="qbo.account.subtype">
+            <field name="internal_name">Investment_TaxExemptSecurities</field>
+            <field name="name">Investment Tax Exempt Securities</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Investment_USGovernmentObligations" model="qbo.account.subtype">
+            <field name="internal_name">Investment_USGovernmentObligations</field>
+            <field name="name">Investment US Government Obligations</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_LoansToOfficers" model="qbo.account.subtype">
+            <field name="internal_name">LoansToOfficers</field>
+            <field name="name">Loans To Officers</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_LoansToOthers" model="qbo.account.subtype">
+            <field name="internal_name">LoansToOthers</field>
+            <field name="name">Loans To Others</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_LoansToStockholders" model="qbo.account.subtype">
+            <field name="internal_name">LoansToStockholders</field>
+            <field name="name">Loans To Stockholders</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_PrepaidExpenses" model="qbo.account.subtype">
+            <field name="internal_name">PrepaidExpenses</field>
+            <field name="name">Prepaid Expenses</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Retainage" model="qbo.account.subtype">
+            <field name="internal_name">Retainage</field>
+            <field name="name">Retainage</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_UndepositedFunds" model="qbo.account.subtype">
+            <field name="internal_name">UndepositedFunds</field>
+            <field name="name">Undeposited Funds</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentAsset"/>
+        </record>
+
+        <!-- Fixed Asset -->
+        <record id="qbo_acc_subtype_AccumulatedDepletion" model="qbo.account.subtype">
+            <field name="internal_name">AccumulatedDepletion</field>
+            <field name="name">Accumulated Depletion</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_AccumulatedDepreciation" model="qbo.account.subtype">
+            <field name="internal_name">AccumulatedDepreciation</field>
+            <field name="name">Accumulated Depreciation</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_DepletableAssets" model="qbo.account.subtype">
+            <field name="internal_name">DepletableAssets</field>
+            <field name="name">Depletable Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_FurnitureAndFixtures" model="qbo.account.subtype">
+            <field name="internal_name">FurnitureAndFixtures</field>
+            <field name="name">Furniture And Fixtures</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Land" model="qbo.account.subtype">
+            <field name="internal_name">Land</field>
+            <field name="name">Land</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_LeaseholdImprovements" model="qbo.account.subtype">
+            <field name="internal_name">LeaseholdImprovements</field>
+            <field name="name">Leasehold Improvements</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherFixedAssets" model="qbo.account.subtype">
+            <field name="internal_name">OtherFixedAssets</field>
+            <field name="name">Other Fixed Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_AccumulatedAmortization" model="qbo.account.subtype">
+            <field name="internal_name">AccumulatedAmortization</field>
+            <field name="name">Accumulated Amortization</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Buildings" model="qbo.account.subtype">
+            <field name="internal_name">Buildings</field>
+            <field name="name">Buildings</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_IntangibleAssets" model="qbo.account.subtype">
+            <field name="internal_name">IntangibleAssets</field>
+            <field name="name">Intangible Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_MachineryAndEquipment" model="qbo.account.subtype">
+            <field name="internal_name">MachineryAndEquipment</field>
+            <field name="name">Machinery And Equipment</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Vehicles" model="qbo.account.subtype">
+            <field name="internal_name">Vehicles</field>
+            <field name="name">Vehicles</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_fixedAsset"/>
+        </record>
+
+        <!-- Other Asset -->
+        <record id="qbo_acc_subtype_LeaseBuyout" model="qbo.account.subtype">
+            <field name="internal_name">LeaseBuyout</field>
+            <field name="name">Lease Buyout</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherLongTermAssets" model="qbo.account.subtype">
+            <field name="internal_name">OtherLongTermAssets</field>
+            <field name="name">Other Long Term Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_SecurityDeposits" model="qbo.account.subtype">
+            <field name="internal_name">SecurityDeposits</field>
+            <field name="name">Security Deposits</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_AccumulatedAmortizationOfOtherAssets " model="qbo.account.subtype">
+            <field name="internal_name">AccumulatedAmortizationOfOtherAssets</field>
+            <field name="name">Accumulated Amortization Of Other Assets</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Goodwill" model="qbo.account.subtype">
+            <field name="internal_name">Goodwill</field>
+            <field name="name">Goodwill</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_Licenses" model="qbo.account.subtype">
+            <field name="internal_name">Licenses</field>
+            <field name="name">Licenses</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+        <record id="qbo_acc_subtype_OrganizationalCosts" model="qbo.account.subtype">
+            <field name="internal_name">OrganizationalCosts</field>
+            <field name="name">Organizational Costs</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherAsset"/>
+        </record>
+
+        <!-- Accounts Receivable -->
+        <record id="qbo_acc_subtype_AccountsReceivable" model="qbo.account.subtype">
+            <field name="internal_name">AccountsReceivable</field>
+            <field name="name">Accounts Receivable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_accountsReceivable"/>
+        </record>
+
+        <!-- Equity -->
+        <record id="qbo_acc_subtype_OpeningBalanceEquity" model="qbo.account.subtype">
+            <field name="internal_name">OpeningBalanceEquity</field>
+            <field name="name">Opening Balance Equity</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_PartnersEquity" model="qbo.account.subtype">
+            <field name="internal_name">PartnersEquity</field>
+            <field name="name">Partners Equity</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_RetainedEarnings" model="qbo.account.subtype">
+            <field name="internal_name">RetainedEarnings</field>
+            <field name="name">Retained Earnings</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_AccumulatedAdjustment" model="qbo.account.subtype">
+            <field name="internal_name">AccumulatedAdjustment</field>
+            <field name="name">Accumulated Adjustment</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_OwnersEquity" model="qbo.account.subtype">
+            <field name="internal_name">OwnersEquity</field>
+            <field name="name">Owners Equity</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_PaidInCapitalOrSurplus" model="qbo.account.subtype">
+            <field name="internal_name">PaidInCapitalOrSurplus</field>
+            <field name="name">Paid In Capital Or Surplus</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_PartnerContributions" model="qbo.account.subtype">
+            <field name="internal_name">PartnerContributions</field>
+            <field name="name">Partner Contributions</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_PartnerDistributions" model="qbo.account.subtype">
+            <field name="internal_name">PartnerDistributions</field>
+            <field name="name">Partner Distributions</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_PreferredStock" model="qbo.account.subtype">
+            <field name="internal_name">PreferredStock</field>
+            <field name="name">Preferred Stock</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_CommonStock" model="qbo.account.subtype">
+            <field name="internal_name">CommonStock</field>
+            <field name="name">Common Stock</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+        <record id="qbo_acc_subtype_TreasuryStock" model="qbo.account.subtype">
+            <field name="internal_name">TreasuryStock</field>
+            <field name="name">Treasury Stock</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_equity"/>
+        </record>
+
+        <!-- Expense -->
+        <record id="qbo_acc_subtype_AdvertisingPromotional" model="qbo.account.subtype">
+            <field name="internal_name">AdvertisingPromotional</field>
+            <field name="name">Advertising Promotional</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_BadDebts" model="qbo.account.subtype">
+            <field name="internal_name">BadDebts</field>
+            <field name="name">Bad Debts</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_BankCharges" model="qbo.account.subtype">
+            <field name="internal_name">BankCharges</field>
+            <field name="name">Bank Charges</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_CharitableContributions" model="qbo.account.subtype">
+            <field name="internal_name">CharitableContributions</field>
+            <field name="name">Charitable Contributions</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_Entertainment" model="qbo.account.subtype">
+            <field name="internal_name">Entertainment</field>
+            <field name="name">Entertainment</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_EntertainmentMeals" model="qbo.account.subtype">
+            <field name="internal_name">EntertainmentMeals</field>
+            <field name="name">Entertainment Meals</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_EquipmentRental" model="qbo.account.subtype">
+            <field name="internal_name">EquipmentRental</field>
+            <field name="name">Equipment Rental</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_FinanceCosts" model="qbo.account.subtype">
+            <field name="internal_name">FinanceCosts</field>
+            <field name="name">Finance Costs</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_GlobalTaxExpense" model="qbo.account.subtype">
+            <field name="internal_name">GlobalTaxExpense</field>
+            <field name="name">Global Tax Expense</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_Insurance" model="qbo.account.subtype">
+            <field name="internal_name">Insurance</field>
+            <field name="name">Insurance</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_InterestPaid" model="qbo.account.subtype">
+            <field name="internal_name">InterestPaid</field>
+            <field name="name">Interest Paid</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_LegalProfessionalFees" model="qbo.account.subtype">
+            <field name="internal_name">LegalProfessionalFees</field>
+            <field name="name">Legal Professional Fees</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_OfficeGeneralAdministrativeExpenses" model="qbo.account.subtype">
+            <field name="internal_name">OfficeGeneralAdministrativeExpenses</field>
+            <field name="name">Office General Administrative Expenses</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherMiscellaneousServiceCost" model="qbo.account.subtype">
+            <field name="internal_name">OtherMiscellaneousServiceCost</field>
+            <field name="name">Other Miscellaneous Service Cost</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_PromotionalMeals" model="qbo.account.subtype">
+            <field name="internal_name">PromotionalMeals</field>
+            <field name="name">Promotional Meals</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_RentOrLeaseOfBuildings" model="qbo.account.subtype">
+            <field name="internal_name">RentOrLeaseOfBuildings</field>
+            <field name="name">Rent Or Lease Of Buildings</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_RepairMaintenance" model="qbo.account.subtype">
+            <field name="internal_name">RepairMaintenance</field>
+            <field name="name">Repair Maintenance</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_ShippingFreightDelivery" model="qbo.account.subtype">
+            <field name="internal_name">ShippingFreightDelivery</field>
+            <field name="name">Shipping Freight Delivery</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_SuppliesMaterials" model="qbo.account.subtype">
+            <field name="internal_name">SuppliesMaterials</field>
+            <field name="name">Supplies Materials</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_Travel" model="qbo.account.subtype">
+            <field name="internal_name">Travel</field>
+            <field name="name">Travel</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_TravelMeals" model="qbo.account.subtype">
+            <field name="internal_name">TravelMeals</field>
+            <field name="name">Travel Meals</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_Utilities" model="qbo.account.subtype">
+            <field name="internal_name">Utilities</field>
+            <field name="name">Utilities</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_Auto" model="qbo.account.subtype">
+            <field name="internal_name">Auto</field>
+            <field name="name">Auto</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_CostOfLabor" model="qbo.account.subtype">
+            <field name="internal_name">CostOfLabor</field>
+            <field name="name">Cost Of Labor</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_DuesSubscriptions" model="qbo.account.subtype">
+            <field name="internal_name">DuesSubscriptions</field>
+            <field name="name">Dues Subscriptions</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_PayrollExpenses" model="qbo.account.subtype">
+            <field name="internal_name">PayrollExpenses</field>
+            <field name="name">Payroll Expenses</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_TaxesPaid" model="qbo.account.subtype">
+            <field name="internal_name">TaxesPaid</field>
+            <field name="name">Taxes Paid</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+        <record id="qbo_acc_subtype_UnappliedCashBillPaymentExpense" model="qbo.account.subtype">
+            <field name="internal_name">UnappliedCashBillPaymentExpense</field>
+            <field name="name">Unapplied Cash Bill Payment Expense</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_expense"/>
+        </record>
+
+        <!-- Other Expense -->
+        <record id="qbo_acc_subtype_Depreciation" model="qbo.account.subtype">
+            <field name="internal_name">Depreciation</field>
+            <field name="name">Depreciation</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherExpense"/>
+        </record>
+        <record id="qbo_acc_subtype_ExchangeGainOrLoss" model="qbo.account.subtype">
+            <field name="internal_name">ExchangeGainOrLoss</field>
+            <field name="name">Exchange Gain Or Loss</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherExpense"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherMiscellaneousExpense" model="qbo.account.subtype">
+            <field name="internal_name">OtherMiscellaneousExpense</field>
+            <field name="name">Other Miscellaneous Expense</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherExpense"/>
+        </record>
+        <record id="qbo_acc_subtype_PenaltiesSettlements" model="qbo.account.subtype">
+            <field name="internal_name">PenaltiesSettlements</field>
+            <field name="name">Penalties Settlements</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherExpense"/>
+        </record>
+        <record id="qbo_acc_subtype_Amortization" model="qbo.account.subtype">
+            <field name="internal_name">Amortization</field>
+            <field name="name">Amortization</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherExpense"/>
+        </record>
+
+        <!-- Cost of Goods Sold -->
+        <record id="qbo_acc_subtype_EquipmentRentalCos" model="qbo.account.subtype">
+            <field name="internal_name">EquipmentRentalCos</field>
+            <field name="name">Equipment Rental Cos</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_costOfGoodsSold"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherCostsOfServiceCos" model="qbo.account.subtype">
+            <field name="internal_name">OtherCostsOfServiceCos</field>
+            <field name="name">Other Costs Of Service Cos</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_costOfGoodsSold"/>
+        </record>
+        <record id="qbo_acc_subtype_ShippingFreightDeliveryCos" model="qbo.account.subtype">
+            <field name="internal_name">ShippingFreightDeliveryCos</field>
+            <field name="name">Shipping Freight Delivery Cos</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_costOfGoodsSold"/>
+        </record>
+        <record id="qbo_acc_subtype_SuppliesMaterialsCogs" model="qbo.account.subtype">
+            <field name="internal_name">SuppliesMaterialsCogs</field>
+            <field name="name">Supplies Materials Cogs</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_costOfGoodsSold"/>
+        </record>
+        <record id="qbo_acc_subtype_CostOfLaborCos" model="qbo.account.subtype">
+            <field name="internal_name">CostOfLaborCos</field>
+            <field name="name">Cost Of Labor Cos</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_costOfGoodsSold"/>
+        </record>
+
+        <!-- Accounts Payable -->
+        <record id="qbo_acc_subtype_AccountsPayable" model="qbo.account.subtype">
+            <field name="internal_name">AccountsPayable</field>
+            <field name="name">Accounts Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_accountsPayable"/>
+        </record>
+
+        <!-- Credit Card -->
+        <record id="qbo_acc_subtype_CreditCard" model="qbo.account.subtype">
+            <field name="internal_name">CreditCard</field>
+            <field name="name">Credit Card</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_creditCard"/>
+        </record>
+
+        <!-- Long Term Liability -->
+        <record id="qbo_acc_subtype_NotesPayable" model="qbo.account.subtype">
+            <field name="internal_name">NotesPayable</field>
+            <field name="name">Notes Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_longTermLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherLongTermLiabilities" model="qbo.account.subtype">
+            <field name="internal_name">OtherLongTermLiabilities</field>
+            <field name="name">Other Long Term Liabilities</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_longTermLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_ShareholderNotesPayable" model="qbo.account.subtype">
+            <field name="internal_name">ShareholderNotesPayable</field>
+            <field name="name">Shareholder Notes Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_longTermLiability"/>
+        </record>
+
+        <!-- Other Current Liability -->
+        <record id="qbo_acc_subtype_DirectDepositPayable" model="qbo.account.subtype">
+            <field name="internal_name">DirectDepositPayable</field>
+            <field name="name">Direct Deposit Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_LineOfCredit" model="qbo.account.subtype">
+            <field name="internal_name">LineOfCredit</field>
+            <field name="name">Line Of Credit</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_LoanPayable" model="qbo.account.subtype">
+            <field name="internal_name">LoanPayable</field>
+            <field name="name">Loan Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_GlobalTaxPayable" model="qbo.account.subtype">
+            <field name="internal_name">GlobalTaxPayable</field>
+            <field name="name">Global Tax Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_GlobalTaxSuspense" model="qbo.account.subtype">
+            <field name="internal_name">GlobalTaxSuspense</field>
+            <field name="name">Global Tax Suspense</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherCurrentLiabilities" model="qbo.account.subtype">
+            <field name="internal_name">OtherCurrentLiabilities</field>
+            <field name="name">Other Current Liabilities</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_PayrollClearing" model="qbo.account.subtype">
+            <field name="internal_name">PayrollClearing</field>
+            <field name="name">Payroll Clearing</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_PayrollTaxPayable" model="qbo.account.subtype">
+            <field name="internal_name">PayrollTaxPayable</field>
+            <field name="name">Payroll Tax Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_PrepaidExpensesPayable" model="qbo.account.subtype">
+            <field name="internal_name">PrepaidExpensesPayable</field>
+            <field name="name">Prepaid Expenses Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_RentsInTrustLiability" model="qbo.account.subtype">
+            <field name="internal_name">RentsInTrustLiability</field>
+            <field name="name">Rents In Trust Liability</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_TrustAccountsLiabilities" model="qbo.account.subtype">
+            <field name="internal_name">TrustAccountsLiabilities</field>
+            <field name="name">Trust Accounts Liabilities</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_FederalIncomeTaxPayable" model="qbo.account.subtype">
+            <field name="internal_name">FederalIncomeTaxPayable</field>
+            <field name="name">Federal Income Tax Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_InsurancePayable" model="qbo.account.subtype">
+            <field name="internal_name">InsurancePayable</field>
+            <field name="name">Insurance Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_SalesTaxPayable" model="qbo.account.subtype">
+            <field name="internal_name">SalesTaxPayable</field>
+            <field name="name">Sales Tax Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+        <record id="qbo_acc_subtype_StateLocalIncomeTaxPayable" model="qbo.account.subtype">
+            <field name="internal_name">StateLocalIncomeTaxPayable</field>
+            <field name="name">State Local Income Tax Payable</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherCurrentLiability"/>
+        </record>
+
+        <!-- Income -->
+        <record id="qbo_acc_subtype_NonProfitIncome" model="qbo.account.subtype">
+            <field name="internal_name">NonProfitIncome</field>
+            <field name="name">Non Profit Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherPrimaryIncome" model="qbo.account.subtype">
+            <field name="internal_name">OtherPrimaryIncome</field>
+            <field name="name">Other Primary Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+        <record id="qbo_acc_subtype_SalesOfProductIncome" model="qbo.account.subtype">
+            <field name="internal_name">SalesOfProductIncome</field>
+            <field name="name">Sales Of Product Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+        <record id="qbo_acc_subtype_ServiceFeeIncome" model="qbo.account.subtype">
+            <field name="internal_name">ServiceFeeIncome</field>
+            <field name="name">Service Fee Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+        <record id="qbo_acc_subtype_DiscountsRefundsGiven" model="qbo.account.subtype">
+            <field name="internal_name">DiscountsRefundsGiven</field>
+            <field name="name">Discounts Refunds Given</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+        <record id="qbo_acc_subtype_UnappliedCashPaymentIncome" model="qbo.account.subtype">
+            <field name="internal_name">UnappliedCashPaymentIncome</field>
+            <field name="name">Unapplied Cash Payment Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_income"/>
+        </record>
+
+        <!-- Other Income -->
+        <record id="qbo_acc_subtype_DividendIncome" model="qbo.account.subtype">
+            <field name="internal_name">DividendIncome</field>
+            <field name="name">Dividend Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherIncome"/>
+        </record>
+        <record id="qbo_acc_subtype_InterestEarned" model="qbo.account.subtype">
+            <field name="internal_name">InterestEarned</field>
+            <field name="name">Interest Earned</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherIncome"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherInvestmentIncome" model="qbo.account.subtype">
+            <field name="internal_name">OtherInvestmentIncome</field>
+            <field name="name">Other Investment Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherIncome"/>
+        </record>
+        <record id="qbo_acc_subtype_OtherMiscellaneousIncome" model="qbo.account.subtype">
+            <field name="internal_name">OtherMiscellaneousIncome</field>
+            <field name="name">Other Miscellaneous Income</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherIncome"/>
+        </record>
+        <record id="qbo_acc_subtype_TaxExemptInterest" model="qbo.account.subtype">
+            <field name="internal_name">TaxExemptInterest</field>
+            <field name="name">Tax Exempt Interest</field>
+            <field name="qbo_type_id" ref="qbo_acc_type_otherIncome"/>
+        </record>
+
+    </data>
+</odoo>

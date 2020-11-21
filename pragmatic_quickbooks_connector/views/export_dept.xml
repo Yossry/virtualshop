@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.server" id="export_dept_to_quickbooks">
+        <field name="name">Export to QBO</field>
+        <field name="model_id" ref="hr.model_hr_department"/>
+        <field name="binding_model_id" ref="hr.model_hr_department"/>
+        <field name="state">code</field>
+        <field name="code">if records:
+               action = records.exportDepartment()
+        </field>
+    </record>
+</odoo>
