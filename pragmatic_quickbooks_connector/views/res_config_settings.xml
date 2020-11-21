@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_res_config_qbo" model="ir.ui.view">
+        <field name="name">res.config.inherit.qbo</field>
+        <field name="model">qbo.config.settings</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+	               <button string="Save" type="object" name="execute" class="oe_highlight"/>
+	               or
+	               <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                </header>
+                <group string="Quickbooks Online Settings" colspan="4">
+                    <field name="update_customer_export" string="Update Customer While Export"/>
+					<field name="update_customer_import" string="Update Customer While Import"/>
+					<field name="update_vendor_export" string="Update Vendor While Export"/>
+					<field name="update_vendor_import" string="Update Vendor While Import"/>
+					<field name="update_product_export" string="Update Product While Export"/>
+					<field name="update_product_import" string="Update Product While Import"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_qbo_res_config" model="ir.actions.act_window">
+	   <field name="name">qbo.res.config.action</field>
+	   <field name="res_model">qbo.config.settings</field>
+	   <field name="view_id" ref="inherit_res_config_qbo"/>
+	   <field name="view_mode">form</field>
+	   <field name="target">inline</field>
+    </record>
+
+    <menuitem id="qbo_menu_res_config_settings"
+	   name="QBO Settings"
+	   parent="sale.menu_sale_config"
+        action="pragmatic_quickbooks_connector.action_qbo_res_config"
+        sequence="50"
+        />
+</odoo>

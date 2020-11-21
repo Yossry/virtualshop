@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="qbo_import_export_log_form" model="ir.ui.view">
+            <field name="name">qbo.logger.form</field>
+            <field name="model">qbo.logger</field>
+            <field name="arch" type="xml">
+                <form string="Export Logs" name="Export Logs">
+                    <sheet>
+                        <group >
+                            <field name="odoo_name"/>
+                            <field name="odoo_object"/>
+                            <field name="message"/>
+                            <field name="created_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_import_export_log_tree" model="ir.ui.view">
+            <field name="name">qbo.logger.tree</field>
+            <field name="model">qbo.logger</field>
+            <field name="arch" type="xml">
+                <tree string="Export Logs" name="Export Logs">
+                    <field name="odoo_name"/>
+                    <field name="odoo_object"/>
+                    <field name="message"/>
+                    <field name="created_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbo_import_export_record" model="ir.actions.act_window">
+            <field name="name">Import Export Log</field>
+            <field name="res_model">qbo.logger</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_qbo_logger_re" name="QBO Loggers" sequence="1" web_icon="pragmatic_quickbooks_connector,static/description/log.png"/>
+        <menuitem id="menu_qbo_import_export_logger" parent="menu_qbo_logger_re" name="Export Logs" action="action_qbo_import_export_record" sequence="3"/>
+    </data>
+</odoo>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Account account inherited -->
+	<record model="ir.ui.view" id="qbo_view_account_form">
+		<field name="name">qbo.view.account.form</field>
+		<field name="model">account.account</field>
+		<field name="inherit_id" ref="account.view_account_form" />
+		<field name="arch" type="xml">
+			<field name="deprecated" position="after">
+				<field name="qbo_acc_type" widget="selection" />
+				<!-- domain="[('qbo_type_id','=',qbo_acc_type)]" -->
+				<field name="qbo_acc_subtype" widget="selection" />
+				<field name="qbo_id" readonly="1"/>
+			</field>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="qbo_view_account_tree">
+		<field name="name">qbo.view.account.tree</field>
+		<field name="model">account.account</field>
+		<field name="inherit_id" ref="account.view_account_list" />
+		<field name="arch" type="xml">
+			<field name="user_type_id" position="after">
+				<field name="qbo_id" readonly="1"/>
+			</field>
+		</field>
+	</record>
+
+	<!-- Account tax inherited -->
+	<record model="ir.ui.view" id="qbo_view_tax_form">
+		<field name="name">qbo.view.account.tax.form</field>
+		<field name="model">account.tax</field>
+		<field name="inherit_id" ref="account.view_tax_form" />
+		<field name="arch" type="xml">
+			<field name="hide_tax_exigibility" position="before">
+				<field name="tax_agency_id" widget="selection" attrs="{'invisible':[('amount_type','=','group')],'required':[('amount_type','!=','group')]}"/>
+			</field>
+			<field name="type_tax_use" position="after">
+				<field name="qbo_tax_id" readonly="1" attrs="{'invisible':[('amount_type','!=','group')]}"/>
+				<field name="qbo_tax_rate_id" string="QBO Tax Id" readonly="1" attrs="{'invisible':[('amount_type','=','group')]}"/>
+			</field>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="qbo_view_tax_tree">
+		<field name="name">qbo.view.account.tax.tree</field>
+		<field name="model">account.tax</field>
+		<field name="inherit_id" ref="account.view_tax_tree" />
+		<field name="arch" type="xml">
+
+			<field name="active" position="after">
+				<field name="qbo_tax_id"/>
+				<field name="qbo_tax_rate_id"/>
+			</field>
+		</field>
+	</record>
+
+	<!-- Account move inherited -->
+	<record model="ir.ui.view" id="qbo_view_account_invoice_form1">
+		<field name="name">qbo.view.account.move.form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form" />
+		<field name="arch" type="xml">
+			<field name="partner_id" position="after">
+				<field name="qbo_invoice_id" readonly="1"/>
+			</field>
+		</field>
+	</record>
+
+	<!-- Account supplier invoice inherited -->
+	<!--<record model="ir.ui.view" id="qbo_view_account_invoice_form2">-->
+		<!--<field name="name">qbo.view.account.move.form</field>-->
+		<!--<field name="model">account.move</field>-->
+		<!--<field name="inherit_id" ref="account.view_move_form" />-->
+		<!--<field name="arch" type="xml">-->
+			<!--<field name="date" position="before">-->
+				<!--<field name="qbo_invoice_id" readonly="1"/>-->
+			<!--</field>-->
+		<!--</field>-->
+	<!--</record>-->
+	
+
+	<!-- Account journal inherited -->
+	
+	<record model="ir.ui.view" id="qbo_view_account_journal_tree">
+		<field name="name">qbo.view.account.journal.form</field>
+		<field name="model">account.journal</field>
+		<field name="inherit_id" ref="account.view_account_journal_tree" />
+		<field name="arch" type="xml">
+			<field name="type" position="after">
+				<field name="qbo_method_id"/>
+			</field>
+		</field>
+	</record> 
+	
+	<record model="ir.ui.view" id="qbo_view_account_journal_form">
+		<field name="name">qbo.view.account.journal.form</field>
+		<field name="model">account.journal</field>
+		<field name="inherit_id" ref="account.view_account_journal_form" />
+		<field name="arch" type="xml">
+			<field name="type" position="after">
+				<field name="qbo_method_id"/>
+			</field>
+		</field>
+	</record>
+
+	<!-- Account payment inherited -->
+	<record model="ir.ui.view" id="qbo_view_account_payment_form">
+		<field name="name">qbo.view.account.payment.form</field>
+		<field name="model">account.payment</field>
+		<field name="inherit_id" ref="account.view_account_payment_form" />
+		<field name="arch" type="xml">
+			<field name="payment_date" position="after">
+				<field name="qbo_payment_ref"/>
+				<field name="qbo_payment_id" attrs="{'invisible':[('partner_type','=','supplier')]}"/>
+				<field name="qbo_bill_payment_id" attrs="{'invisible':[('partner_type','=','customer')]}"/>
+			</field>
+		</field>
+	</record>
+
+	<!-- Account agency views -->
+	<record id="qbo_view_account_tax_agency" model="ir.ui.view">
+		<field name="name">account.tax.agency.form</field>
+		<field name="model">account.tax.agency</field>
+		<field name="arch" type="xml">
+			<form string="Tax Agency">
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="tax_track_on_sale"/>
+						<field name="tax_track_on_purchase"/>
+						<field name="qbo_agency_id" readonly="1"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="qbo_action_account_tax_agency" model="ir.actions.act_window">
+		<field name="name">Tax Agency</field>
+		<field name="res_model">account.tax.agency</field>
+		<!--<field name="view_type">form</field>-->
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="qbo_menu_account_tax_agency" name="Tax Agency"
+		parent="account.account_account_menu" sequence="2"
+		action="qbo_action_account_tax_agency"/>
+
+	<!-- QBO Payment Method views 
+	<record id="qbo_view_payment_method" model="ir.ui.view">
+		<field name="name">view.qbo.payment.method.form</field>
+		<field name="model">qbo.payment.method</field>
+		<field name="arch" type="xml">
+			<form string="Payment Method">
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="type"/>
+						<field name="qbo_method_id" readonly="1"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="qbo_action_payment_method" model="ir.actions.act_window">
+		<field name="name">Payment Method</field>
+		<field name="res_model">qbo.payment.method</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="qbo_menu_payment_method" name="QBO Payment Method"
+		parent="account.account_account_menu" sequence="6"
+		action="qbo_action_payment_method"/>
+-->
+
+	<!-- server actions to add option in the menu "Action" account.account object -->
+	<record id="action_export_account" model="ir.actions.server">
+		<field name="name">Export to QBO</field>
+		<field name="model_id" ref="account.model_account_account" />
+		<field name="binding_model_id" ref="account.model_account_account"/>
+		<field name="state">code</field>
+		<field name="code">
+	if records:
+    	action = records.export_to_qbo()
+		</field>
+	</record>
+
+	<!-- <record id="value_export_account" model="ir.values">
+		<field name="name">Export to QBO</field>
+		<field name="key2">client_action_multi</field>
+		<field name="value" eval="'ir.actions.server,' +str(ref('action_export_account'))" />
+		<field name="key">action</field>
+		<field name="model">account.account</field>
+	</record> -->
+
+
+	<!-- added for quickbooks payment term export -->
+    <record model="ir.actions.server" id="export_payment_to_quickbooks">
+        <field name="name">Export to QBO</field>
+        <field name="model_id" ref="account.model_account_payment_term"/>
+		<field name="binding_model_id" ref="account.model_account_payment_term"/>
+        <field name="state">code</field>
+        <field name="code">if records:
+               action = records.export_payment_term_to_quickbooks()
+        </field>
+    </record>
+
+	<!-- server actions to add option in the menu "Action" for account.tax object -->
+	<record id="action_export_account_tax" model="ir.actions.server">
+		<field name="name">Export to QBO</field>
+		<field name="model_id" ref="account.model_account_tax" />
+		<field name="binding_model_id" ref="account.model_account_tax"/>
+		<field name="state">code</field>
+		<field name="code">
+if records:
+    action = records.export_to_qbo()
+		</field>
+	</record>
+
+	<!-- <record id="value_export_account_tax" model="ir.values">
+		<field name="name">Export to QBO</field>
+		<field name="key2">client_action_multi</field>
+		<field name="value" eval="'ir.actions.server,' +str(ref('action_export_account_tax'))" />
+		<field name="key">action</field>
+		<field name="model">account.tax</field>
+	</record> -->
+
+	<!-- server actions to add option in the menu "Action" for account.tax.agency object -->
+	<record id="action_export_account_tax_agency" model="ir.actions.server">
+		<field name="name">Export to QBO</field>
+		<field name="model_id" ref="pragmatic_quickbooks_connector.model_account_tax_agency" />
+		<field name="binding_model_id" ref="pragmatic_quickbooks_connector.model_account_tax_agency"/>
+		<field name="state">code</field>
+		<field name="code">
+if records:
+    action = records.export_to_qbo()
+		</field>
+	</record>
+
+	<!-- <record id="value_export_account_tax_agency" model="ir.values">
+		<field name="name">Export to QBO</field>
+		<field name="key2">client_action_multi</field>
+		<field name="value" eval="'ir.actions.server,' +str(ref('action_export_account_tax_agency'))" />
+		<field name="key">action</field>
+		<field name="model">account.tax.agency</field>
+	</record> -->
+
+	<!-- server actions to add option in the menu "Action" for account.move object -->
+	<record id="action_export_account_invoice" model="ir.actions.server">
+		<field name="name">Export to QBO</field>
+		<field name="model_id" ref="account.model_account_move" />
+		<field name="binding_model_id" ref="account.model_account_move"/>
+		<field name="state">code</field>
+		<field name="code">
+			if records:
+    			action = records.export_to_qbo()
+		</field>
+	</record>
+
+	<!-- <record id="value_export_account_invoice" model="ir.values">
+		<field name="name">Export to QBO</field>
+		<field name="key2">client_action_multi</field>
+		<field name="value" eval="'ir.actions.server,' +str(ref('action_export_account_invoice'))" />
+		<field name="key">action</field>
+		<field name="model">account.move</field>
+	</record> -->
+
+	<!-- server actions to add option in the menu "Action" for qbo.payment.method object -->
+
+	<!--	<record id="action_export_payment_method" model="ir.actions.server">
+		<field name="name">Export to QBO</field>
+		<field name="model_id" ref="model_qbo_payment_method" />
+		<field name="binding_model_id" ref="model_qbo_payment_method"/>
+		<field name="state">code</field>
+		<field name="code">
+if records:
+    action = records.export_to_qbo()
+		</field>
+	</record> -->
+
+	<!-- <record id="value_export_payment_method" model="ir.values">
+		<field name="name">Export to QBO</field>
+		<field name="key2">client_action_multi</field>
+		<field name="value" eval="'ir.actions.server,' +str(ref('action_export_payment_method'))" />
+		<field name="key">action</field>
+		<field name="model">qbo.payment.method</field>
+	</record>	 -->
+</odoo>

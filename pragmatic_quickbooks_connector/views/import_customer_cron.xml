@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+         <record model="ir.cron" id="import_customer_cron" forcecreate="True">
+           <field name="name">Import Customer Cron</field>
+           <field name="interval_name">1</field>
+           <field name="interval_type">hours</field>
+           <field eval="True" name="active"/>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="model_id" ref="model_res_company"/>
+           <field name="state">code</field>
+           <field name="code">model.import_customers()</field>
+         </record>
+   </data>
+</odoo>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_employee_form_custom_" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='work_email']" position="after">
+
+                <field name="quickbook_id" string="Quickbook id" readonly="1"
+                       help="Quickbook Id which gets generated automatically after creation employee"/>
+                <field name="sync_id" string="Sync Tokent"/>
+                <field name="ssn" string="SSN"/>
+                <!--<field name="sync_id" string="Sync Token" readonly="1" help="SyncToken which gets generated automatically after creation of employee"/>-->
+                <field name="billing_rate" string="Billing Rate (/hr)"/>
+                <field name="hired_date" string="Hired Date"/>
+                <field name="released_date" string="Released Date"/>
+                <field name="employee_no" string="Employee No"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_dept_form_custom" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+
+                <field name="quickbook_id" string="Quickbook id" readonly="1"
+                       help="Quickbook Id which gets generated automatically after creation employee"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--<record id="view_respartner_form_custom" model="ir.ui.view">-->
+    <!--<field name="name">res.partner.form.inherit</field>-->
+    <!--<field name="model">res.partner</field>-->
+    <!--<field name="inherit_id" ref="base.view_partner_form" />-->
+    <!--<field name="arch" type="xml">-->
+
+    <!--<xpath expr="//field[@name='category_id']" position="after">-->
+
+    <!--<field name="qb_id" string="Quickbook Id"/>-->
+
+    <!--</xpath>-->
+
+    <!--</field>-->
+    <!--</record>-->
+
+
+    <record id="view_sale_form_custom" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="quickbook_id" readonly="1"/>
+                <field name="total" invisible="1"/>
+                <field name="percentage_amt" invisible="1"/>
+
+                <label for="street" string="Add global discount"/>
+                <div class="o_address_format">
+                    <field class="o_address_zip" name="check" readonly="1"/>
+                    <field class="o_address_city" name="discount_type" string="" readonly="1"/>
+                    <field class="o_address_city" name="amount" string="" readonly="1"/>
+                </div>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='name']"
+                   position="after">
+                <field name="qb_id" invisible="1"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='analytic_tag_ids']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+        </field>
+    </record>
+
+
+    <record id="view_invoice_form_custom123" model="ir.ui.view">
+        <field name="name">account.move.form.inherit123</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="/form/sheet/group/group/field[@name='invoice_payment_term_id']" position="after">-->
+            <field name="journal_id" position="before">
+                <field name="total" invisible="1"/>
+                <field name="percentage_amt" invisible="1"/>
+                <label for="street" string="Add global discount"/>
+                <div class="o_address_format">
+                    <field class="o_address_zip" name="check" readonly="1"/>
+                    <field class="o_address_city" name="discount_type" string="" readonly="1"/>
+                    <field class="o_address_city" name="amount" string="" readonly="1"/>
+                </div>
+            </field>
+            <!--</xpath>-->
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='name']"
+                   position="after">
+                <field name="qb_id" string="QB Id" invisible="1"/>
+            </xpath>
+            <!--<xpath expr="//field[@name='amount_total']" position="attributes">-->
+            <!--<attribute name="invisible">True</attribute>-->
+            <!--</xpath>-->
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='discount']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_invoice_form_custom" model="ir.ui.view">
+        <field name="name">purchase.order.invoice.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="quickbook_id" readonly="1"/>
+                <!--<field name="purchase_order_id" string="QB PO No"/>-->
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='name']"
+                   position="after">
+                <field name="qb_id" string="QB Id"/>
+            </xpath>
+            <!--<xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/form/group/group/field[@name='analytic_tag_ids']" position="attributes">-->
+            <!--<attribute name="invisible">True</attribute>-->
+            <!--</xpath>-->
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='account_analytic_id']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='analytic_tag_ids']"
+                   position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="quickbook_view_product_template_only_form">
+        <field name="name">quickbook.product.template.only.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="is_discount_product"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

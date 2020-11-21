@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.server" id="export_partner_to_quickbooks">
+        <field name="name">Export to QBO</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">if records:
+               action = records.exportPartner()
+        </field>
+    </record>
+</odoo>

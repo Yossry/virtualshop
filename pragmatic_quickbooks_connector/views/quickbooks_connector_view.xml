@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="quickbook_connection_form_view" model="ir.ui.view">
+		<field name="name">quickbook.connection.formview</field>
+		<field name="model">quickbook.config</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Quickbook Configuration">
+				<group>
+					<field name="url" />
+					<field name="client_id" />
+					<field name="client_secret" />
+					<field name="request_token_url" />
+					<field name="access_token_url" />
+					<field name="auth_base_url" />
+					<field name="company_id" />
+					<field name="access_token" />
+					<field name="auth_code" />
+				</group>
+				<button string='Login With QuickBook' type="object" name="login" />
+			</form>
+			<notebook>
+				<page string="General" name="customer">
+					<group>
+						<group>
+							<h3>Import Customer/Partner</h3>
+							<button string="Import" type="object" name="importcust" />
+						</group>
+						<group>
+							<field name="x_quickbooks_last_customer_sync" />
+							<field name="x_quickbooks_last_customer_imported_id" />
+						</group>
+					</group>
+					<group>
+                        <group>
+                            <h3>Import Payment Terms</h3>
+                            <button string="Import" type="object" name="import_payment_term_from_quickbooks" />
+                        </group>
+                        <group>
+                            <field name="x_quickbooks_last_paymentterm_sync" />
+                            <field name="x_quickbooks_last_paymentterm_imported_id" />
+                        </group>
+                    </group>
+					<group>
+						<group>
+							<h3>Import Chart of Accounts</h3>
+							<button string="Import Chart of Accounts" type="object"
+								name="import_chart_of_accounts" />
+						</group>
+						<group>
+							<field name="last_acc_imported_id" />
+						</group>
+					</group>
+					<group>
+						<group>
+							<h3>Import Tax</h3>
+							<button string="Import Tax" type="object"
+								name="import_tax" />
+						</group>
+						<group>
+							<field name="last_imported_tax_id" />
+						</group>
+					</group>
+				</page>
+				<page string="Sales Orders" name="sale_orders">
+					<h3>Import Sales Orders</h3>
+					<button string="Import" />
+				</page>
+			</notebook>
+		</field>
+	</record>
+
+
+	<record id="quickbook_connection_tree_view" model="ir.ui.view">
+		<field name="name">quickbook.connection.treeview</field>
+		<field name="model">quickbook.config</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="url" />
+			</tree>
+		</field>
+	</record>
+
+
+	<record model="ir.actions.act_window" id="quickbook_connection_action">
+		<field name="name">QuickBooks Connection Master</field>
+		<field name="res_model">quickbook.config</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_connect_to_qb" name="QuickBooks"
+		action="quickbook_connection_action" parent="account.menu_finance_configuration"
+		sequence="1" />
+
+</odoo>
