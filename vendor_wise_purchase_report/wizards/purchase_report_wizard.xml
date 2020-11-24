@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="purchase_report_wizard" model="ir.ui.view">
+        <field name="name">Purchase Report</field>
+        <field name="model">vendor.purchase.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Report Vendors Wise">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="vendor_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="state"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_vendor_wise_purchase_report" string="Print" type="object" class="oe_highlight"/>
+                    OR
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_report_wizard" model="ir.actions.act_window">
+        <field name="name">Vendor Wise Purchase Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vendor.purchase.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="purchase_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_purchase_report_wizard"
+              id="menu_purchase_report_wizard"
+              parent="purchase.purchase_report"/>
+
+</odoo>

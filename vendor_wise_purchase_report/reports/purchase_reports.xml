@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_purchase_vendor"
+                string="By Vendors"
+                model="vendor.purchase.report.wizard"
+                report_type="qweb-pdf"
+                file="vendor_wise_purchase_report.purchase_report_vendor"
+                name="vendor_wise_purchase_report.purchase_report_vendor"
+        />
+    </data>
+</odoo>
