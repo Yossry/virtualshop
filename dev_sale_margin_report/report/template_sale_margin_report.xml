@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <template id="main_sale_margin_report">
+        <t t-call="web.external_layout">
+            <div class="page" style="font-size:11px;">
+                <div style="margin-top: 5px;">
+                    &#160;
+                </div>
+                <h3>
+                    <center>Sale Margin Report</center>
+                </h3>
+                <div class="row">
+                    <div class="col-6" style="font-size: 14px;">
+                        <b>From</b>&#160;:&#160;
+                        <span t-esc="get_date(o.start_date)"/>
+                    </div>
+                    <div class="col-6 pull-right" style="text-align: right;font-size: 14px;">
+                        <b>TO</b>&#160;:&#160;
+                        <span t-esc="get_date(o.end_date)"/>
+                    </div>
+                </div>
+                <span t-set="data" t-value="get_margin_data(o)"/>
+                <table width="100%" style="table-layout: fixed;margin-top: 10px;">
+                    <thead style="display: table-header-group">
+                        <tr style="word-wrap: break-word;background-color: #B9B9B3;color: black;">
+                            <th style="width: 6%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Sale Order</th>
+                            <th style="width: 8%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Product</th>
+                            <th style="width: 9%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Order Date</th>
+                            <th style="width: 9%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Customer</th>
+                            <th style="width: 10%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Warehouse</th>
+                            <th style="width: 8%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Sale Team</th>
+                            <th style="width: 8%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Sales<br/>person
+                            </th>
+                            <th style="width: 7%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Cost</th>
+                            <th style="width: 12%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Price<br/>(Tax Excluded)
+                            </th>
+                            <th style="width: 9%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Discount</th>
+                            <th style="width: 7%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Margin</th>
+                            <th style="width: 7%;border: 1px solid black;font-size: 14px;text-align: center;padding:10px;">Margin<br/>(%)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="data" t-as="line" style="word-wrap: break-word;page-break-inside: avoid">
+                            <span t-if="line['red_line'] == True">
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: center;">
+                                    <span t-esc="line['sale_order']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;">
+                                    <span t-esc="line['product']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: center;">
+                                    <span t-esc="line['date']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;">
+                                    <span t-esc="line['customer']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: center;">
+                                    <span t-esc="line['warehouse']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: center;">
+                                    <span t-esc="line['team']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;">
+                                    <span t-esc="line['salesperson']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: right;">
+                                    <span t-esc="line['cost']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: right;">
+                                    <span t-esc="line['price']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: right;">
+                                    <span t-esc="line['discount']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: right;">
+                                    <span t-esc="line['margin']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;color: red;text-align: right;">
+                                    <span t-esc="line['margin_percentage']"/>
+                                </td>
+                            </span>
+
+                            <span t-if="line['red_line'] == False">
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: center;">
+                                    <span t-esc="line['sale_order']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px">
+                                    <span t-esc="line['product']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: center;">
+                                    <span t-esc="line['date']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px">
+                                    <span t-esc="line['customer']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: center;">
+                                    <span t-esc="line['warehouse']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: center;">
+                                    <span t-esc="line['team']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px">
+                                    <span t-esc="line['salesperson']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: right;">
+                                    <span t-esc="line['cost']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: right;">
+                                    <span t-esc="line['price']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: right;">
+                                    <span t-esc="line['discount']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: right;">
+                                    <span t-esc="line['margin']"/>
+                                </td>
+                                <td style="border: 0.5px solid black;padding: 10px;text-align: right;">
+                                    <span t-esc="line['margin_percentage']"/>
+                                </td>
+                            </span>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="template_sale_margin_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="dev_sale_margin_report.main_sale_margin_report"/>
+            </t>
+        </t>
+    </template>
+</odoo>

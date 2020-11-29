@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <report id="menu_sale_margin_report"
+            model="export.sale.margin"
+            string="Sale Margin"
+            report_type="qweb-pdf"
+            name="dev_sale_margin_report.template_sale_margin_report"
+            file="dev_sale_margin_report.template_sale_margin_report"
+            >
+    </report>
+
+    <record id="paperformat_menu_sale_margin_report" model="report.paperformat">
+        <field name="name">Sale Margin</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">60</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">55</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="dev_sale_margin_report.menu_sale_margin_report" model="ir.actions.report">
+        <field name="paperformat_id" ref="dev_sale_margin_report.paperformat_menu_sale_margin_report" />
+    </record>
+</odoo>
