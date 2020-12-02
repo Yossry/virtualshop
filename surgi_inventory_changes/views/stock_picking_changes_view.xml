@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <record id="view_picking_form_inherit" model="ir.ui.view">
+            <field name="name">view.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="action_assign" position="replace">
+                    <button name="action_assign" states="confirmed,waiting" string="Reserve" type="object" class="oe_highlight" groups="base.group_user"/>
+                </button>
+                <!--<button name="button_validate" position="replace">-->
+                <!--<button name="do_new_transfer" states="validate" string="Validate" groups="stock.group_stock_user" type="object" class="oe_highlight"/>-->
+                <!--</button>-->
+                <!--====================== A.Salama ==========================-->
+                <xpath expr="//field[@name='priority']" position="replace">
+                </xpath>
+
+                <!--<xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="picking_type_id"/>
+                </xpath>-->
+                <xpath expr="//field[@name='location_dest_id']" position="after">
+                    <field name="priority"/>
+                </xpath>
+
+                <!--<xpath expr="//page[@name='extra']/group/group/field[@name='picking_type_id']" position="replace">
+                </xpath>-->
+
+                <xpath expr="//field[@name='priority']" position="after">
+                    <field name="receipt_exchange" invisible="1"/>
+                    <field name="type_delivery_type" invisible="1"/>
+                    <field name="gov_form_url"  placeholder="https://" widget="url"
+                           attrs="{'invisible':[('type_delivery_type','!=','gov')]}"/>
+                    <field name="tender_order_id" attrs="{'invisible':[('receipt_exchange','!=',True)]}"/>
+                    <field name="exchange_order_id" attrs="{'invisible':[('type_delivery_type','!=','exchange')]}"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page name="approvals" string="Approvals" attrs="{'invisible':[('picking_type_code','!=','internal')]}">
+
+                        <field name="approval_lines" >
+                            <tree delete="false">
+                                <field name="warehouse_manager_id"/>
+                                <field name="has_rule" invisible="1"/>
+                                <field name="is_approved" attrs="{'readonly':[('has_rule','=',False)]}"/>
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_approval_line" model="ir.ui.view">
+            <field name="name">approval line</field>
+            <field name="model">approval.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="is_approved" attrs="{'readonly':[('has_rule','=',False)]}"/>
+                        <field name="has_rule" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="warehouse_manager_id"/>
+                        <field name="pick_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

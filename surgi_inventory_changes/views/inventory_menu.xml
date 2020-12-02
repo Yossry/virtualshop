@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <menuitem
+        id="stock_inventory_user_report_menu"
+        name="Inv. User Report"
+        groups="stock.group_stock_user"
+        parent="stock.menu_stock_root" sequence="150"/>
+
+        <menuitem
+        action="stock_move_line_action_inventory_users"
+        id="stock_move_line_menu_inventory_user"
+        name="product Moves"
+        groups="stock.group_stock_user"
+        parent="stock_inventory_user_report_menu" sequence="150"/>
+
+    </data>
+</odoo>

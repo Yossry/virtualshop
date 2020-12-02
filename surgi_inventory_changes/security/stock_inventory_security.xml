@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <data noupdate="0">
+         <!--================= A.Salama ==================-->
+        <!-- add record rules to see owen/all warhouses-->
+        <record id="stock_warehouse_security_own" model="ir.rule">
+            <field name="name">Users on this Warehouse (see own warhouse)</field>
+            <field name="model_id" ref="model_stock_picking_type" />
+            <field name="domain_force">[('warehouse_users','=',user.id )]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field eval="False" name="global"/>
+            <field name="groups" eval="[(4,ref('stock.group_stock_user'))]"/>
+        </record>
+        <record id="stock_warehouse_security_all" model="ir.rule">
+            <field name="name">see all warhouse</field>
+            <field name="model_id" ref="model_stock_picking_type" />
+            <field name="domain_force">[(1,'=',1 )]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field eval="False" name="global"/>
+            <field name="groups" eval="[(4,ref('stock.group_stock_manager'))]"/>
+        </record>
+    </data>
+</odoo>

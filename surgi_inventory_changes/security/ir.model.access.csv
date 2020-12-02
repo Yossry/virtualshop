@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+approval_line_inventory_user,approval.line.inventory.user,surgi_inventory_changes.model_approval_line,stock.group_stock_user,1,1,1,0
+approval_line_inventory_manager,approval.line.inventory.user,surgi_inventory_changes.model_approval_line,stock.group_stock_manager,1,1,1,1
+manager_line_group_stock_user,manager.line.group.stock.user,surgi_inventory_changes.model_manager_line,stock.group_stock_user,1,1,1,0
+manager_line_group_stock_manager,manager.line.group.stock.manager,surgi_inventory_changes.model_manager_line,stock.group_stock_manager,1,1,1,1

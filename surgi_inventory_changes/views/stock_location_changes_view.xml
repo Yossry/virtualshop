@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_location_inherit" model="ir.ui.view">
+            <field name="name">stock.location.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+
+               <field name="return_location" position="after">
+                   <field name="is_operation_location" readonly="1"/>
+                   <field name="delivery_order_location" readonly="1"/>
+                   <field name="sales_order_location" readonly="1"/>
+
+               </field>
+
+               <field name="return_location" position="after">
+                   <field name="required_approval"/>
+                   <field name="warehouse_id" attrs="{'invisible': [('is_operation_location', '=', False),
+                        ('required_approval', '=', False)],
+                  'required': ['|',
+                        ('is_operation_location', '=', True),
+                        ('required_approval', '=', True)]}"/>
+               </field>
+               </field>
+        </record>
+
+    </data>
+</odoo>
