@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_stock_picking_search" model="ir.ui.view">
+            <field name="name">name.stock.picking.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="shipment_no_ids"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_stock_picking_inherit" model="ir.ui.view">
+            <field name="name">name.stock.picking.inherit.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="shipment_no_ids" widget="many2many_tags"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_purchase_order_inherit" model="ir.ui.view">
+            <field name="name">name.purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="shipment_no_ids" widget="many2many_tags"/>
+                    <field name="is_ship" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+        <record id="form_view_shipment_no" model="ir.ui.view">
+            <field name="name">name.shipment.shipment.form.view</field>
+            <field name="model">shipment.shipment</field>
+            <field name="arch" type="xml">
+                <form string="Shipment No">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_shipment_no_form" model="ir.actions.act_window">
+            <field name="name">Shipment No</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">shipment.shipment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem id="categ_menu_action_shipment" name="Shipment No" parent="purchase.menu_purchase_root" action="action_view_shipment_no_form" sequence="3"/>
+
+    </data>
+</odoo>
