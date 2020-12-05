@@ -47,6 +47,12 @@ class SaleMarginReport(models.AbstractModel):
         if wizard_id.customer_ids:
             customer_domain = ('partner_id', 'in', wizard_id.customer_ids.ids)
             domain.append(customer_domain)
+        if wizard_id.status_id:
+            status_domain = ('state', 'in', wizard_id.status_id.ids)
+            domain.append(status_domain)
+        if wizard_id.invoice_state:
+            invoice_state_domain = ('invoice_status', 'in', wizard_id.invoice_state.ids)
+            domain.append(invoice_state_domain)
         if wizard_id.user_ids:
             user_domain = ('user_id', 'in', wizard_id.user_ids.ids)
             domain.append(user_domain)
@@ -89,7 +95,10 @@ class SaleMarginReport(models.AbstractModel):
                                          'discount': ("%.2f" % discount_amount or 0),
                                          'margin': ("%.2f" % line.margin or 0),
                                          'margin_percentage': ("%.2f" %  margin_percentage),
-                                         'red_line': red_line
+                                         'red_line': red_line,
+                                         'status': sale_id.state,
+                                         'invoice_s': sale_id.invoice_status
+
                                          }
                             margin_data.append(data_dict)
                         if product_domain:
@@ -114,7 +123,10 @@ class SaleMarginReport(models.AbstractModel):
                                              'discount': ("%.2f" % discount_amount or 0),
                                              'margin': ("%.2f" % line.margin or 0),
                                              'margin_percentage': margin_percentage or 0,
-                                             'red_line': red_line
+                                             'red_line': red_line,
+                                             'status': sale_id.state,
+                                             'invoice_st': sale_id.invoice_status
+
                                              }
                                 margin_data.append(data_dict)
         return margin_data

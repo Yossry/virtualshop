@@ -68,6 +68,8 @@ class ExportSaleMargin(models.TransientModel):
         worksheet.col(9).width = 60 * 60
         worksheet.col(10).width = 60 * 60
         worksheet.col(11).width = 60 * 60
+        worksheet.col(12).width = 60 * 60
+        worksheet.col(13).width = 60 * 60
 
         worksheet.write_merge(1, 3, 1, 4, 'Sale Margin Report', header_style)
 
@@ -92,6 +94,9 @@ class ExportSaleMargin(models.TransientModel):
         worksheet.write_merge(7, 8, 9, 9, 'Discount', sub_header)
         worksheet.write_merge(7, 8, 10, 10, 'Margin', sub_header)
         worksheet.write_merge(7, 8, 11, 11, 'Margin(%)', sub_header)
+        worksheet.write_merge(7, 8, 12, 12, 'Status', sub_header)
+        worksheet.write_merge(7, 8, 13, 13, 'Invoice Status', sub_header)
+
 
         # content writing
 
@@ -102,6 +107,12 @@ class ExportSaleMargin(models.TransientModel):
         if self.customer_ids:
             customer_domain = ('partner_id', 'in', self.customer_ids.ids)
             domain.append(customer_domain)
+        if self.status_id:
+            status_domain = ('state', 'in', self.status_id.ids)
+            domain.append(status_domain)
+            if self.invoice_state:
+                invoice_state_domain = ('invoice_status', 'in', self.invoice_state.ids)
+                domain.append(invoice_state_domain)
         if self.user_ids:
             user_domain = ('user_id', 'in', self.user_ids.ids)
             domain.append(user_domain)
@@ -149,6 +160,9 @@ class ExportSaleMargin(models.TransientModel):
                             worksheet.write(row_counter, 10, line.margin, decimal_right_content)
                             margin_percentage = self.get_margin_percentage(line)
                             worksheet.write(row_counter, 11, margin_percentage,  decimal_right_content)
+                            worksheet.write(row_counter, 12, sale_id.state, content_style)
+                            worksheet.write(row_counter, 13, sale_id.invoice_status, content_style)
+
                             row_counter += 1
                         if product_domain:
                             if line.product_id.id in product_domain:
@@ -169,6 +183,9 @@ class ExportSaleMargin(models.TransientModel):
                                 worksheet.write(row_counter, 10, line.margin, decimal_right_content)
                                 margin_percentage = self.get_margin_percentage(line)
                                 worksheet.write(row_counter, 11, margin_percentage, decimal_right_content)
+                                worksheet.write(row_counter, 12, sale_id.state, content_style)
+                                worksheet.write(row_counter, 13, sale_id.invoice_status, content_style)
+
                                 row_counter += 1
 
         fp = BytesIO()
@@ -188,11 +205,16 @@ class ExportSaleMargin(models.TransientModel):
     end_date = fields.Date(string="To", default=date.today(), required=True)
     excel_file = fields.Binary(string='Excel File')
     company_ids = fields.Many2many('res.company', string='Company')
-    warehouse_ids = fields.Many2many('stock.warehouse', string='Warehouse')
-    product_ids = fields.Many2many('product.product', string='Product')
-    customer_ids = fields.Many2many('res.partner', string='Customer', domain=[('customer_rank', '=', 1)])
-    sale_team_ids = fields.Many2many('crm.team', string='Sale Team')
-    user_ids = fields.Many2many('res.users', string='Salesperson')
+    warehouse_ids = fields.Many2many('stock.warehouse', string='Warehouse',domain="[('company_id','=', company_ids)]",)
+    product_ids = fields.Many2many('product.product', string='Product',domain="[('company_id','=', company_ids)]",)
+    customer_ids = fields.Many2many('res.partner', string='Customer',domain="[('company_id','=', company_ids)]",)
+    sale_team_ids = fields.Many2many('crm.team', string='Sale Team',domain="[('company_id','=', company_ids)]",)
+    user_ids = fields.Many2many('res.users', string='Salesperson',domain="[('sale_team_id','=', sale_team_ids)]",)
     highlight_negative_margin = fields.Boolean(string='Highlight Negative Margin')
+    status_id = fields.Many2many('sale.order', string='Status')
+    invoice_state = fields.Many2many('account.move.line', string='Invoice Status')
+
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
